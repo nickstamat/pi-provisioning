@@ -1,0 +1,39 @@
+- name: install dependencies
+  apt:
+    name:
+      - haveged
+      - openjdk-8-jre-headless
+    force_apt_get: yes
+    update_cache: yes
+    state: latest
+
+- name: add repository key
+  apt_key:
+    url: https://dl.ubnt.com/unifi/unifi-repo.gpg
+    state: present
+
+- name: add repository
+  apt_repository:
+    repo: deb http://www.ui.com/downloads/unifi/debian stable ubiquiti
+    state: present
+    filename: 100-ubnt-unifi
+    update_cache: yes
+
+- name: install dependencies
+  apt:
+    name: unifi
+    force_apt_get: yes
+    update_cache: yes
+    state: latest
+
+- name: stop mongodb service
+  systemd:
+    name: mongodb
+    state: stopped
+    daemon_reload: yes
+
+- name: disable mongodb service
+  systemd:
+    name: mongodb
+    enabled: no
+    daemon_reload: yes

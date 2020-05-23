@@ -1,0 +1,17 @@
+- name: pi-provisioning
+  remote_user: pi
+  become: true
+  hosts: all
+  gather_facts: true
+  vars:
+    - hostname: pi
+    - timezone: Europe/Vienna
+    - main_user: pi
+    - gh_pubkey_user: nickstamat
+  roles:
+    - raspi-config
+    - upgrades
+    - utils
+    - podman
+    - unifi-controller
+    - reboot

@@ -1,0 +1,13 @@
+- name: Upgrade all packages
+  apt:
+    force_apt_get: yes
+    update_cache: yes
+    upgrade: dist
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
