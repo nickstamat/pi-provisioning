@@ -1,2 +1,4 @@
+# when running the pi without a monitor, we can safely reduce the amount of
+# memory used by the GPU, leaving more memory available for the system
 - name: set memory split
   shell: raspi-config nonint do_memory_split 16
