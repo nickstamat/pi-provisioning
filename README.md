@@ -1,13 +1,19 @@
 # pi-provisioning
 
-An Ansible playbook for provisioning my Raspberry Pi with the tools I need.
+An Ansible playbook for provisioning my Raspberry Pi fleet with k3s.
 
-## Requirements
-
-- Ansible 2.9+
+This is based on https://github.com/k3s-io/k3s-ansible, but I've stripped out all Raspbian-/CentOS-related parts which are not relevant for my own setup.
 
 ## Instructions
 
-1.  Ensure that Pi has SSH enabled and the public key is added to _authorized_keys_.
-2.  `PI_IP_ADDR=<ip>`
-3.  `ansible-playbook -i "$PI_IP_ADDR," playbook.yml`
+Create and adjust inventory:
+
+```
+cp -R inventory/sample inventory/my-cluster
+```
+
+Start provisioning:
+
+```
+ansible-playbook site.yml -i inventory/my-cluster/hosts.ini
+```
